@@ -6,7 +6,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Detalles de la Moneda')),
+      appBar: AppBar(title: const Text('Detalles de la Moneda.')),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
