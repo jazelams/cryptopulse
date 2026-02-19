@@ -24,8 +24,7 @@ class CryptoCard extends StatelessWidget {
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: ListTile(
-        onTap: () =>
-            context.push('/details'), // <-- ¡Esta es la magia del clic!
+        onTap: () => context.push('/details'),
         contentPadding: const EdgeInsets.all(12),
         leading: CircleAvatar(
           backgroundColor: Colors.deepPurple.shade100,
