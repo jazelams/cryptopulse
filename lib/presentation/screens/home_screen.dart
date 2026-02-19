@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../widgets/crypto_card.dart'; // Importamos tu nuevo widget
+import '../widgets/crypto_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.only(top: 10),
         children: const [
-          // Aquí estamos usando tu widget reutilizable con datos estáticos
+          // Aquí estamos usando el widget reutilizable con datos estáticos
           CryptoCard(
             name: 'Bitcoin',
             symbol: 'BTC',
