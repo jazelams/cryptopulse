@@ -58,8 +58,8 @@ flutter:
   fonts:
     - family: Inter  # Así bautizamos a nuestra fuente
       fonts:
-        - asset: assets/fonts/Inter-Regular.ttf
-        - asset: assets/fonts/Inter-Bold.ttf
+        - asset: assets/fonts/Inter_18pt-Bold.ttf
+        - asset: assets/fonts/Inter_18pt-Regular.ttf
           weight: 700
 
   # To add assets to your application, add an assets section, like this:
