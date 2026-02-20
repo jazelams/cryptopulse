@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
           'CryptoPulse',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -21,33 +22,64 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView(
-        padding: const EdgeInsets.only(top: 10),
-        children: const [
-          // Aquí estamos usando el widget reutilizable con datos estáticos
-          CryptoCard(
-            name: 'Bitcoin',
-            symbol: 'BTC',
-            price: '\$64,230.00',
-            change: '+2.5%',
-            isPositive: true,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column (
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+
+          const SizedBox(height: 16),
+
+          const Text(
+            "Mercado",
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          CryptoCard(
-            name: 'Ethereum',
-            symbol: 'ETH',
-            price: '\$3,450.50',
-            change: '-1.2%',
-            isPositive: false,
+
+        const SizedBox(height: 4),
+        Text(
+          "Precios actuales de Criptomoneda",
+          style: TextStyle(color: Colors.grey[400]),
+        ),
+
+        const SizedBox(height: 10),
+
+        Divider(color: Colors.grey[800]),
+
+        const SizedBox(height: 10),
+
+        Expanded(
+          child: ListView(
+            children: const [
+              CryptoCard(
+                name:'Bitcoin',
+                symbol:'BTC',
+                price:'\$64,230.00',
+                change:'+2.5%',
+                isPositive: true,
+              ),
+              CryptoCard(
+                name:'Ethereum',
+                symbol:'ETH',
+                price:'\$3,450.50',
+                change:'-1.2%',
+                isPositive:false,
+              ),
+              CryptoCard(
+                name:'Solana',
+                symbol:'SOL',
+                price:'\$145.20',
+                change:'+5.7%',
+                isPositive: true,
+              ),
+            ],
           ),
-          CryptoCard(
-            name: 'Solana',
-            symbol: 'SOL',
-            price: '\$145.20',
-            change: '+5.7%',
-            isPositive: true,
-          ),
-        ],
-      ),
+        ),
+      ],
+    ),
+  ),
     );
   }
 }
