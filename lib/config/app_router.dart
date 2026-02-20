@@ -9,7 +9,10 @@ final appRouter = GoRouter(
     GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
     GoRoute(
       path: '/details',
-      builder: (context, state) => const DetailsScreen(),
+      builder: (context, state) {
+        final crypto = state.extra as Map<String, dynamic>;
+        return DetailsScreen(crypto:crypto);
+      },
     ),
     GoRoute(
       path: '/settings',
