@@ -25,6 +25,19 @@ class CryptoPulseApp extends ConsumerWidget {
 
       theme: ThemeData(
         brightness: Brightness.light,
+        scaffoldBackgroundColor: const Color.fromARGB(255, 225, 228, 232),
+        colorScheme: const ColorScheme.light(
+          primary: Colors.deepPurple,
+          surface: Colors.white,
+          onSurface: Color(0xFF1A1A1A),
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 225, 228, 232),
+          foregroundColor: Color(
+            0xFF1A1A1A,
+          ), // El color del título y los iconos
+          elevation: 0,
+        ),
         useMaterial3: true,
         fontFamily: 'Inter',
       ),

@@ -3,13 +3,10 @@ import 'package:flutter/material.dart';
 class DetailsScreen extends StatelessWidget {
   final Map<String, dynamic> crypto;
 
-  const DetailsScreen({
-    super.key,
-    required this.crypto,
-  });
+  const DetailsScreen({super.key, required this.crypto});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(crypto['name'])),
       body: Padding(
@@ -21,14 +18,12 @@ class DetailsScreen extends StatelessWidget {
               '${crypto['name']} (${crypto['symbol']})',
               style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
-            Text(
-              crypto['price'],
-              style: const TextStyle(fontSize: 24),
-            ),
+            Text(crypto['price'], style: const TextStyle(fontSize: 24)),
             const SizedBox(height: 20),
             Text(
               "Cambio: ${crypto['change']}",
               style: TextStyle(
+                fontSize: 20,
                 color: crypto['isPositive'] ? Colors.green : Colors.red,
               ),
             ),

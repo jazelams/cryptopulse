@@ -10,8 +10,17 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/details',
       builder: (context, state) {
-        final crypto = state.extra as Map<String, dynamic>;
-        return DetailsScreen(crypto:crypto);
+        // Si state.extra es null, usa un Map vacío de respaldo
+        final crypto =
+            (state.extra as Map<String, dynamic>?) ??
+            {
+              'name': 'Error',
+              'symbol': 'ERR',
+              'price': '\$0.00',
+              'change': '0%',
+              'isPositive': true,
+            };
+        return DetailsScreen(crypto: crypto);
       },
     ),
     GoRoute(
