@@ -50,7 +50,6 @@ class CryptoCard extends StatelessWidget {
             ),
             const SizedBox(width: 16),
 
-            // 2. Símbolo (Arriba) y Nombre (Abajo en gris)
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +67,7 @@ class CryptoCard extends StatelessWidget {
                     style: TextStyle(
                       color: Theme.of(
                         context,
-                      ).colorScheme.onSurface.withValues(alpha: 0.5),
+                      ).colorScheme.onSurface.withValues(alpha: 0.70),
                       fontSize: 13,
                     ),
                   ),
