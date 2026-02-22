@@ -28,8 +28,7 @@ class HomeScreen extends ConsumerWidget {
           ),
           IconButton(
             icon: const Icon(Icons.settings),
-            onPressed: () =>
-                context.push('/settings'), // Botón de configuración
+            onPressed: () => context.push('/settings'),
           ),
         ],
       ),
@@ -40,20 +39,27 @@ class HomeScreen extends ConsumerWidget {
           children: [
             const SizedBox(height: 16),
 
-            const Text(
-              "Mercado",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-
-            const SizedBox(height: 4),
-            Text(
-              "Precios actuales de Criptomoneda",
-              style: TextStyle(color: Colors.grey[400]),
+            Center(
+              child: Column(
+                children: [
+                  const Text(
+                    "Mercado",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    "Precios actuales de Criptomoneda",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
             ),
 
             const SizedBox(height: 10),
 
-            Divider(color: Colors.grey[800]),
+            Divider(color: Theme.of(context).dividerColor),
 
             const SizedBox(height: 10),
 
@@ -79,6 +85,62 @@ class HomeScreen extends ConsumerWidget {
                     symbol: 'SOL',
                     price: '\$145.20',
                     change: '+5.7%',
+                    isPositive: true,
+                  ),
+                  CryptoCard(
+                    name: 'Binance Coin',
+                    symbol: 'BNB',
+                    price: '\$590.30',
+                    change: '+1.4%',
+                    isPositive: true,
+                  ),
+                  CryptoCard(
+                    name: 'Ripple',
+                    symbol: 'XRP',
+                    price: '\$0.61',
+                    change: '-0.8%',
+                    isPositive: false,
+                  ),
+                  CryptoCard(
+                    name: 'Cardano',
+                    symbol: 'ADA',
+                    price: '\$0.45',
+                    change: '-2.1%',
+                    isPositive: false,
+                  ),
+                  CryptoCard(
+                    name: 'Dogecoin',
+                    symbol: 'DOGE',
+                    price: '\$0.15',
+                    change: '+8.3%',
+                    isPositive: true,
+                  ),
+                  CryptoCard(
+                    name: 'Polkadot',
+                    symbol: 'DOT',
+                    price: '\$7.20',
+                    change: '-0.5%',
+                    isPositive: false,
+                  ),
+                  CryptoCard(
+                    name: 'Litecoin',
+                    symbol: 'LTC',
+                    price: '\$85.40',
+                    change: '+3.2%',
+                    isPositive: true,
+                  ),
+                  CryptoCard(
+                    name: 'Chainlink',
+                    symbol: 'LINK',
+                    price: '\$14.80',
+                    change: '-1.5%',
+                    isPositive: false,
+                  ),
+                  CryptoCard(
+                    name: 'Avalanche',
+                    symbol: 'AVAX',
+                    price: '\$35.90',
+                    change: '+4.1%',
                     isPositive: true,
                   ),
                 ],
