@@ -19,6 +19,19 @@ class HomeScreen extends ConsumerWidget {
         centerTitle: true,
         actions: [
           IconButton(
+            icon:const Icon(Icons.search),
+            onPressed: (){
+              showSearch(
+                context: context,
+                delegate: CryptoSearchDelegate(),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed:() => context.push('/settings'),
+          ),
+          IconButton(
             icon: Icon(
               themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode,
             ),
@@ -150,5 +163,56 @@ class HomeScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+}
+class CryptoSearchDelegate extends SearchDelegate {
+  final List<String> cryptos = [
+    "Bitcoin",
+    "Ethereum",
+    "Solana",
+    "Binance Coin",
+    "Ripple",
+    "Cardano",
+    "Dogecoin",
+    "Polkadot",
+    "Litecoin",
+    "Chainlink",
+    "Avalanche"
+  ];
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () => query = "",
+      )
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () => close(context, null),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    final results = cryptos
+        .where((crypto) => crypto.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
+    return ListView(
+      children: results
+          .map((crypto) => ListTile(title: Text(crypto)))
+          .toList(),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    return buildResults(context);
   }
 }
