@@ -19,17 +19,10 @@ class HomeScreen extends ConsumerWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            icon:const Icon(Icons.search),
-            onPressed: (){
-              showSearch(
-                context: context,
-                delegate: CryptoSearchDelegate(),
-              );
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              showSearch(context: context, delegate: CryptoSearchDelegate());
             },
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed:() => context.push('/settings'),
           ),
           IconButton(
             icon: Icon(
@@ -165,6 +158,7 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 }
+
 class CryptoSearchDelegate extends SearchDelegate {
   final List<String> cryptos = [
     "Bitcoin",
@@ -177,16 +171,13 @@ class CryptoSearchDelegate extends SearchDelegate {
     "Polkadot",
     "Litecoin",
     "Chainlink",
-    "Avalanche"
+    "Avalanche",
   ];
 
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      IconButton(
-        icon: const Icon(Icons.clear),
-        onPressed: () => query = "",
-      )
+      IconButton(icon: const Icon(Icons.clear), onPressed: () => query = ""),
     ];
   }
 
@@ -205,9 +196,7 @@ class CryptoSearchDelegate extends SearchDelegate {
         .toList();
 
     return ListView(
-      children: results
-          .map((crypto) => ListTile(title: Text(crypto)))
-          .toList(),
+      children: results.map((crypto) => ListTile(title: Text(crypto))).toList(),
     );
   }
 
