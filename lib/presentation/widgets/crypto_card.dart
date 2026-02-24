@@ -10,7 +10,6 @@ class CryptoCard extends StatelessWidget {
   final bool isPositive;
   final List<FlSpot> spots;
 
-  // ¡Nuevas variables para la estrellita!
   final bool isFavorite;
   final VoidCallback onFavoriteToggle;
 
@@ -22,8 +21,8 @@ class CryptoCard extends StatelessWidget {
     required this.change,
     required this.isPositive,
     required this.spots,
-    required this.isFavorite, // Lo hacemos obligatorio
-    required this.onFavoriteToggle, // Lo hacemos obligatorio
+    required this.isFavorite,
+    required this.onFavoriteToggle,
   });
 
   @override
@@ -60,7 +59,7 @@ class CryptoCard extends StatelessWidget {
 
             SizedBox(
               width:
-                  70, // Lo hice un poquito más chico para que quepa la estrella
+                  70, 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -139,7 +138,7 @@ class CryptoCard extends StatelessWidget {
               ],
             ),
 
-            // ¡AQUÍ ESTÁ EL BOTÓN DE LA ESTRELLA!
+            // boton accion estrella del fav
             IconButton(
               icon: Icon(
                 isFavorite ? Icons.star : Icons.star_border,
@@ -148,7 +147,7 @@ class CryptoCard extends StatelessWidget {
                     : Colors.grey.withValues(alpha: 0.3),
               ),
               onPressed:
-                  onFavoriteToggle, // Avisa a la pantalla principal cuando lo tocan
+                  onFavoriteToggle, 
             ),
           ],
         ),

@@ -18,7 +18,7 @@ class HomeScreen extends ConsumerWidget {
     final currentFilter = ref.watch(filterProvider);
     final favoriteSymbols = ref.watch(favoritesProvider);
 
-    // Lista de 11 Criptomonedas de prueba
+    // Lista de criptomonedas
     final List<Map<String, dynamic>> allCryptos = [
       {
         'name': 'Bitcoin',
@@ -198,7 +198,7 @@ class HomeScreen extends ConsumerWidget {
       },
     ];
 
-    // Lógica dinámica del filtro
+    // Lógica dinámica del bttn fav
     final displayedCryptos = currentFilter == 'Favoritos'
         ? allCryptos
               .where((c) => favoriteSymbols.contains(c['symbol']))
@@ -388,36 +388,53 @@ class HomeScreen extends ConsumerWidget {
     bool isSelected,
   ) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isFavoritosBtn = label == 'Favoritos';
+
+    // colores boton todos
+    final todosSelectedBg = isDark ? Colors.white : const Color(0xFF1A1A1A);
+    final todosSelectedText = isDark ? Colors.black : Colors.white;
+
+    // colores voton fav
+    const favoritosSelectedBg = Color(0xFF9E1B1B);
+    const favoritosSelectedText = Colors.white;
+
+    // colores para los botones inactivos
+    final unselectedBg = isDark
+        ? Colors.white.withValues(alpha: 0.08)
+        : Colors.black.withValues(alpha: 0.05);
+    final unselectedText = isDark
+        ? Colors.white.withValues(alpha: 0.5)
+        : Colors.black.withValues(alpha: 0.6);
+    final unselectedBorder = isDark
+        ? Colors.transparent
+        : Colors.black.withValues(alpha: 0.1);
+
+    final bgColor = isSelected
+        ? (isFavoritosBtn ? favoritosSelectedBg : todosSelectedBg)
+        : unselectedBg;
+
+    final textColor = isSelected
+        ? (isFavoritosBtn ? favoritosSelectedText : todosSelectedText)
+        : unselectedText;
 
     return GestureDetector(
       onTap: () {
         ref.read(filterProvider.notifier).state = label;
       },
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected
-              ? Theme.of(context).colorScheme.primary
-              : (isDark
-                    ? Colors.white.withValues(alpha: 0.08)
-                    : Colors.black.withValues(alpha: 0.05)),
+          color: bgColor,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected
-                ? Colors.transparent
-                : (isDark
-                      ? Colors.transparent
-                      : Colors.black.withValues(alpha: 0.1)),
+            color: isSelected ? Colors.transparent : unselectedBorder,
           ),
         ),
         child: Text(
           label,
           style: TextStyle(
-            color: isSelected
-                ? (isDark ? Colors.black : Colors.white)
-                : (isDark
-                      ? Colors.white.withValues(alpha: 0.5)
-                      : Colors.black.withValues(alpha: 0.6)),
+            color: textColor,
             fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
             fontSize: 13,
           ),
