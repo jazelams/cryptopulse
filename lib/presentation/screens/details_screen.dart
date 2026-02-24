@@ -14,7 +14,6 @@ class DetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             Text(
               '${crypto['name']} (${crypto['symbol']})',
               style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
@@ -23,18 +22,17 @@ class DetailsScreen extends StatelessWidget {
             const SizedBox(height: 10),
 
             // Tarjeta de detalles
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.grey[900],
-                borderRadius: BorderRadius.circular(12),
-              ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     crypto['price'],
-                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     crypto['change'],
@@ -77,33 +75,27 @@ class DetailsScreen extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.grey[900],
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Column(
-                children: [
-                  ListTile(
-                    leading: Icon(Icons.trending_up, color: Colors.green),
-                    title: Text("Tendencia positiva"),
-                    subtitle: Text("El mercado muestra señales de recuperación"),
+            const Column(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.trending_up, color: Colors.green),
+                  title: Text("Tendencia positiva"),
+                  subtitle: Text("El mercado muestra señales de recuperación"),
+                ),
+                ListTile(
+                  leading: Icon(Icons.show_chart, color: Colors.orange),
+                  title: Text("Alta volatilidad"),
+                  subtitle: Text(
+                    "Se detectan movimientos bruscos en el precio",
                   ),
-                  ListTile(
-                    leading: Icon(Icons.show_chart, color: Colors.orange),
-                    title: Text("Alta volatilidad"),
-                    subtitle: Text("Se detectan movimientos bruscos en el precio"),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.public, color: Colors.blue),
-                    title: Text("Interés global"),
-                    subtitle: Text("Mayor actividad en mercados internacionales"),
-                  ),
-                ],
-              ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.public, color: Colors.blue),
+                  title: Text("Interés global"),
+                  subtitle: Text("Mayor actividad en mercados internacionales"),
+                ),
+              ],
             ),
-
           ],
         ),
       ),
