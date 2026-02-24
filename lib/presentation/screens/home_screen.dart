@@ -49,12 +49,12 @@ class HomeScreen extends ConsumerWidget {
               child: Column(
                 children: [
                   const Text(
-                    "Mercado",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    "Mercado de Criptomonedas",
+                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    "Precios actuales de Criptomoneda",
+                    "Precios actuales de Criptomoneda.",
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
