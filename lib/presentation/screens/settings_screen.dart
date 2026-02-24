@@ -7,7 +7,9 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Configuración')),
-      body: const Center(child: Text('Opciones de la aplicación')),
+      body: const Center(
+        child: Text('Opciones de la aplicación. Próximamente...'),
+      ),
     );
   }
 }
