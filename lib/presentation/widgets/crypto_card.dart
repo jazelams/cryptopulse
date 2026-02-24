@@ -47,7 +47,6 @@ class CryptoCard extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          // SE MANTIENE TU LÓGICA DE NAVEGACIÓN EXACTAMENTE IGUAL
           onTap: () => context.push(
             '/details',
             extra: {
@@ -62,7 +61,7 @@ class CryptoCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Row(
               children: [
-                // Icono (Mantenemos tu lógica del CircleAvatar)
+                // Icono
                 CircleAvatar(
                   radius: 20,
                   backgroundColor: textColor.withValues(alpha: 0.05),
@@ -77,7 +76,7 @@ class CryptoCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
 
-                // Textos (Invertidos: Nombre arriba, Símbolo abajo)
+                // Textos Invertidos: Nombre arriba, Símbolo abajo
                 Expanded(
                   flex: 3,
                   child: Column(
@@ -102,7 +101,6 @@ class CryptoCard extends StatelessWidget {
                   ),
                 ),
 
-                // NUEVO: El espacio del gráfico
                 Expanded(
                   flex: 3,
                   child: Container(
@@ -117,7 +115,7 @@ class CryptoCard extends StatelessWidget {
                   ),
                 ),
 
-                // Precios (Alineados a la derecha con los nuevos tamaños)
+                // Precios alineados a la derecha
                 Expanded(
                   flex: 4,
                   child: Column(
@@ -152,7 +150,7 @@ class CryptoCard extends StatelessWidget {
   }
 }
 
-// NUEVO: Esta clase es la que dibuja la curva sin usar librerías de terceros
+//aqui la clase dibuja la curva sin usar librerías de terceros
 class _MockSparklinePainter extends CustomPainter {
   final bool isPositive;
   final Color lineColor;
