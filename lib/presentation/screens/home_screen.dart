@@ -50,11 +50,11 @@ class HomeScreen extends ConsumerWidget {
                 children: [
                   const Text(
                     "Mercado de Criptomonedas",
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    "Precios actuales de Criptomoneda.",
+                    "Precios actuales de Criptomoneda",
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
