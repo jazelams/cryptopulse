@@ -45,29 +45,102 @@ class HomeScreen extends ConsumerWidget {
           children: [
             const SizedBox(height: 16),
 
-            Center(
+            // encabezado
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.only(
+                top: 24,
+                left: 16,
+                right: 16,
+                bottom: 20,
+              ),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: Theme.of(context).brightness == Brightness.dark
+                      ? [
+                          const Color(0xFF1E1F30),
+                          const Color(0xFF1E1F30).withValues(alpha: 0.0),
+                        ]
+                      : [
+                          Theme.of(
+                            context,
+                          ).colorScheme.primaryContainer.withValues(alpha: 0.4),
+                          Theme.of(
+                            context,
+                          ).colorScheme.primaryContainer.withValues(alpha: 0.0),
+                        ],
+                  stops: const [0.0, 1.0],
+                ),
+              ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Mercado de Criptomonedas",
-                    style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
+                  Row(
+                    children: [
+                      Container(
+                        width: 6,
+                        height: 6,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        "MERCADO EN VIVO",
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          color: Theme.of(context).colorScheme.primary,
+                          letterSpacing: 1.5,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 12),
                   Text(
-                    "Precios actuales de Criptomoneda",
+                    "Tendencias Crypto",
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onSurface,
+                      height: 1.1,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    "Precios globales actualizados.",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // botones para el encabezado
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        _buildFilterChip(context, "Todos", true),
+                        const SizedBox(width: 8),
+                        _buildFilterChip(context, "Ganadores", false),
+                        const SizedBox(width: 8),
+                        _buildFilterChip(context, "Perdedores", false),
+                        const SizedBox(width: 8),
+                        _buildFilterChip(context, "Favoritos", false),
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
 
-            const SizedBox(height: 10),
-
-            Divider(color: Theme.of(context).dividerColor),
-
-            const SizedBox(height: 10),
+            const SizedBox(height: 16),
 
             Expanded(
               child: ListView(
@@ -157,6 +230,37 @@ class HomeScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+// con esto se hacen los botones del encabezado
+Widget _buildFilterChip(BuildContext context, String label, bool isSelected) {
+  final colorScheme = Theme.of(context).colorScheme;
+  final isDark = Theme.of(context).brightness == Brightness.dark;
+
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    decoration: BoxDecoration(
+      color: isSelected
+          ? colorScheme.primary
+          : (isDark ? const Color(0xFF2A2B3D) : Colors.white),
+      borderRadius: BorderRadius.circular(20),
+      border: Border.all(
+        color: isSelected
+            ? Colors.transparent
+            : (isDark ? Colors.transparent : Colors.grey.shade300),
+      ),
+    ),
+    child: Text(
+      label,
+      style: TextStyle(
+        color: isSelected
+            ? colorScheme.onPrimary
+            : colorScheme.onSurface.withValues(alpha: 0.7),
+        fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+        fontSize: 13,
+      ),
+    ),
+  );
 }
 
 class CryptoSearchDelegate extends SearchDelegate {
