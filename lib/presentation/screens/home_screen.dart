@@ -1,4 +1,3 @@
-import 'package:cryptopulse/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +9,6 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -25,14 +23,7 @@ class HomeScreen extends ConsumerWidget {
               showSearch(context: context, delegate: CryptoSearchDelegate());
             },
           ),
-          IconButton(
-            icon: Icon(
-              themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode,
-            ),
-            onPressed: () {
-              ref.read(themeProvider.notifier).toggleTheme();
-            },
-          ),
+
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () => context.push('/settings'),
