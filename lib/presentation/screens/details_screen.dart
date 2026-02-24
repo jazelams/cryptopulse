@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class DetailsScreen extends StatelessWidget {
   final Map<String, dynamic> crypto;
@@ -21,27 +22,61 @@ class DetailsScreen extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            // Tarjeta de detalles
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    crypto['price'],
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+            // Precio y cambio
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  crypto['price'],
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Text(
-                    crypto['change'],
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: crypto['isPositive'] ? Colors.green : Colors.red,
-                    ),
+                ),
+                Text(
+                  crypto['change'],
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: crypto['isPositive'] ? Colors.green : Colors.red,
                   ),
-                ],
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 20),
+
+            // Grafica
+            const Text(
+              "Movimiento reciente",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+
+            const SizedBox(height: 10),
+
+            SizedBox(
+              height: 200,
+              child: LineChart(
+                LineChartData(
+                  gridData: FlGridData(show: false),
+                  titlesData: FlTitlesData(show: false),
+                  borderData: FlBorderData(show: false),
+                  lineBarsData: [
+                    LineChartBarData(
+                      spots: const [
+                        FlSpot(0, 1),
+                        FlSpot(1, 1.2),
+                        FlSpot(2, 1.1),
+                        FlSpot(3, 1.4),
+                        FlSpot(4, 1.3),
+                        FlSpot(5, 1.6),
+                        FlSpot(6, 1.5),
+                      ],
+                      isCurved: true,
+                      barWidth: 3,
+                      dotData: FlDotData(show: false),
+                    ),
+                  ],
+                ),
               ),
             ),
 
