@@ -45,10 +45,9 @@ class HomeScreen extends ConsumerWidget {
           children: [
             const SizedBox(height: 16),
 
-            // ENCABEZADO OPTIMIZADO PARA MODO CLARO Y OSCURO
+            // encabezado
             Container(
               width: double.infinity,
-              // Ajustamos el padding para que fluya hacia los bordes
               padding: const EdgeInsets.only(
                 top: 24,
                 left: 16,
@@ -56,31 +55,21 @@ class HomeScreen extends ConsumerWidget {
                 bottom: 20,
               ),
               decoration: BoxDecoration(
-                // El secreto: un degradado que en AMBOS temas se vuelve transparente (0.0)
-                // revelando el color de fondo natural de la app sin parches
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: Theme.of(context).brightness == Brightness.dark
                       ? [
-                          const Color(
-                            0xFF1E1F30,
-                          ), // Azul profundo oscuro arriba
-                          const Color(
-                            0xFF1E1F30,
-                          ).withValues(alpha: 0.0), // Se desvanece
+                          const Color(0xFF1E1F30),
+                          const Color(0xFF1E1F30).withValues(alpha: 0.0),
                         ]
                       : [
                           Theme.of(
                             context,
-                          ).colorScheme.primaryContainer.withValues(
-                            alpha: 0.4,
-                          ), // Azul/púrpura muy suave y translúcido
+                          ).colorScheme.primaryContainer.withValues(alpha: 0.4),
                           Theme.of(
                             context,
-                          ).colorScheme.primaryContainer.withValues(
-                            alpha: 0.0,
-                          ), // Se desvanece al fondo natural
+                          ).colorScheme.primaryContainer.withValues(alpha: 0.0),
                         ],
                   stops: const [0.0, 1.0],
                 ),
@@ -90,7 +79,6 @@ class HomeScreen extends ConsumerWidget {
                 children: [
                   Row(
                     children: [
-                      // Mantenemos el detalle, adaptado al tema actual
                       Container(
                         width: 6,
                         height: 6,
@@ -117,9 +105,7 @@ class HomeScreen extends ConsumerWidget {
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface, // Se adapta automático a claro/oscuro
+                      color: Theme.of(context).colorScheme.onSurface,
                       height: 1.1,
                     ),
                   ),
@@ -135,7 +121,7 @@ class HomeScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 24),
 
-                  // Chips de Filtro
+                  // botones para el encabezado
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -154,7 +140,7 @@ class HomeScreen extends ConsumerWidget {
               ),
             ),
 
-            const SizedBox(height: 16), // Espacio antes de la lista
+            const SizedBox(height: 16),
 
             Expanded(
               child: ListView(
@@ -246,7 +232,7 @@ class HomeScreen extends ConsumerWidget {
   }
 }
 
-// NUEVO: Método para crear los botones de filtro estilo píldora
+// con esto se hacen los botones del encabezado
 Widget _buildFilterChip(BuildContext context, String label, bool isSelected) {
   final colorScheme = Theme.of(context).colorScheme;
   final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -256,11 +242,9 @@ Widget _buildFilterChip(BuildContext context, String label, bool isSelected) {
     decoration: BoxDecoration(
       color: isSelected
           ? colorScheme.primary
-          // EL CAMBIO: Un gris más claro pero definido en tema claro, y oscuro en oscuro
           : (isDark ? const Color(0xFF2A2B3D) : Colors.white),
       borderRadius: BorderRadius.circular(20),
       border: Border.all(
-        // EL CAMBIO: Un borde muy sutil para que las píldoras no se pierdan en el fondo claro
         color: isSelected
             ? Colors.transparent
             : (isDark ? Colors.transparent : Colors.grey.shade300),
