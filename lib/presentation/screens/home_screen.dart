@@ -54,7 +54,7 @@ class HomeScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    "Precios actuales de Criptomoneda en la web",
+                    "Precios actuales de Criptomoneda",
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
