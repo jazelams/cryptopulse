@@ -85,34 +85,52 @@ class CryptoCard extends StatelessWidget {
               ),
             ),
 
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: SizedBox(
-                  height: 35,
-                  child: LineChart(
-                    LineChartData(
-                      gridData: const FlGridData(show: false),
-                      titlesData: const FlTitlesData(show: false),
-                      borderData: FlBorderData(show: false),
-                      lineTouchData: const LineTouchData(enabled: false),
-                      lineBarsData: [
-                        LineChartBarData(
-                          spots: spots,
-                          isCurved: true,
-                          barWidth: 2,
-                          color: isPositive
-                              ? Colors.greenAccent.shade400
-                              : Colors.redAccent.shade400,
-                          dotData: const FlDotData(show: false),
-                          belowBarData: BarAreaData(show: false),
-                        ),
-                      ],
-                    ),
-                  ),
+      Expanded(
+  child: Center(
+    child: SizedBox(
+      width: MediaQuery.of(context).size.width * 0.28,
+      height: 45,
+      child: LineChart(
+        LineChartData(
+          gridData: const FlGridData(show: false),
+          titlesData: const FlTitlesData(show: false),
+          borderData: FlBorderData(show: false),
+          lineTouchData: const LineTouchData(enabled: false),
+          minY: 0,
+          lineBarsData: [
+            LineChartBarData(
+              spots: spots,
+              isCurved: true,
+              curveSmoothness: 0.15, // curva ligera estilo trading
+              barWidth: 3,
+              isStrokeCapRound: true,
+              color: isPositive
+                  ? Colors.greenAccent.shade400
+                  : Colors.redAccent.shade400,
+              dotData: const FlDotData(show: false),
+              belowBarData: BarAreaData(
+                show: true,
+                gradient: LinearGradient(
+                  colors: isPositive
+                      ? [
+                          Colors.greenAccent.shade400.withOpacity(0.3),
+                          Colors.transparent,
+                        ]
+                      : [
+                          Colors.redAccent.shade400.withOpacity(0.3),
+                          Colors.transparent,
+                        ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
                 ),
               ),
             ),
+          ],
+        ),
+      ),
+    ),
+  ),
+),
 
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
