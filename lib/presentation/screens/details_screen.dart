@@ -1,113 +1,151 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import '../widgets/simple_crypto_chart.dart';
+import '../widgets/news_bottom_sheet.dart';
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends StatefulWidget {
   final Map<String, dynamic> crypto;
 
   const DetailsScreen({super.key, required this.crypto});
 
   @override
+  State<DetailsScreen> createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
+
+  String _selectedTimeframe = '24H';
+
+  // Base de datos de prueba para las diferentes gráficas
+  final Map<String, List<FlSpot>> _chartData = {
+    '24H': const [
+      FlSpot(0, 60.0), FlSpot(1, 61.2), FlSpot(2, 60.5), FlSpot(3, 62.8),
+      FlSpot(4, 61.9), FlSpot(5, 63.4), FlSpot(6, 62.1), FlSpot(7, 64.5),
+    ],
+    '1S': const [
+      FlSpot(0, 68.0), FlSpot(1, 67.5), FlSpot(2, 69.1), FlSpot(3, 65.4),
+      FlSpot(4, 66.8), FlSpot(5, 63.2), FlSpot(6, 64.5), FlSpot(7, 61.0),
+    ],
+    '1M': const [
+      FlSpot(0, 45.0), FlSpot(1, 48.5), FlSpot(2, 47.0), FlSpot(3, 52.3),
+      FlSpot(4, 50.8), FlSpot(5, 55.4), FlSpot(6, 53.9), FlSpot(7, 58.1),
+    ],
+    '1A': const [
+      FlSpot(0, 25.0), FlSpot(1, 32.4), FlSpot(2, 45.8), FlSpot(3, 58.2),
+      FlSpot(4, 73.7), FlSpot(5, 68.5), FlSpot(6, 65.1), FlSpot(7, 52.4),
+    ],
+  };
+
+  @override
   Widget build(BuildContext context) {
+
+    final currentSpots = _chartData[_selectedTimeframe]!;
+    final bool isPositive = currentSpots.last.y >= currentSpots.first.y;
+    final Color chartColor = isPositive ? Colors.greenAccent.shade400 : Colors.redAccent.shade400;
+
     return Scaffold(
-      appBar: AppBar(title: Text(crypto['name'])),
+      appBar: AppBar(title: Text(widget.crypto['name'])),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${crypto['name']} (${crypto['symbol']})',
+              '${widget.crypto['name']} (${widget.crypto['symbol']})',
               style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
-
             const SizedBox(height: 10),
 
-            /// Precio y cambio
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  crypto['price'],
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  widget.crypto['price'],
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  crypto['change'],
+                  widget.crypto['change'],
                   style: TextStyle(
                     fontSize: 18,
-                    color: crypto['isPositive'] ? Colors.green : Colors.red,
+                    color: widget.crypto['isPositive'] ? Colors.green : Colors.red,
                   ),
                 ),
               ],
             ),
+            const SizedBox(height: 25),
 
-            const SizedBox(height: 20),
 
-            /// Grafica
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: ['24H', '1S', '1M', '1A'].map((timeframe) {
+                final isSelected = _selectedTimeframe == timeframe;
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedTimeframe = timeframe;
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.2)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      timeframe,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: isSelected
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+            
+            const SizedBox(height: 25),
+
             const Text(
               "Movimiento reciente",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-
             const SizedBox(height: 10),
 
-            SizedBox(
-              height: 200,
-              child: LineChart(
-                LineChartData(
-                  gridData: FlGridData(show: false),
-                  titlesData: FlTitlesData(show: false),
-                  borderData: FlBorderData(show: false),
-                  lineBarsData: [
-                    LineChartBarData(
-                      spots: const [
-                        FlSpot(0, 1),
-                        FlSpot(1, 1.2),
-                        FlSpot(2, 1.1),
-                        FlSpot(3, 1.4),
-                        FlSpot(4, 1.3),
-                        FlSpot(5, 1.6),
-                        FlSpot(6, 1.5),
-                      ],
-                      isCurved: true,
-                      barWidth: 3,
-                      dotData: FlDotData(show: false),
-                    ),
-                  ],
-                ),
-              ),
+
+            SimpleCryptoChart(
+              spots: currentSpots, 
+              chartColor: chartColor,
             ),
 
             const SizedBox(height: 15),
 
-            /// boton para las noticias
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 12,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               ),
-              onPressed: () => _showNews(context),
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) => const NewsBottomSheet(),
+                );
+              },
               icon: const Icon(Icons.article),
               label: const Text("Ver noticias"),
             ),
-
             const SizedBox(height: 20),
 
-            /// Estadisticas
             const Text(
               "Estadísticas",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-
             const SizedBox(height: 10),
 
             const ListTile(
@@ -115,21 +153,17 @@ class DetailsScreen extends StatelessWidget {
               title: Text("Volatilidad"),
               subtitle: Text("Movimientos moderados en las últimas horas"),
             ),
-
             const ListTile(
               leading: Icon(Icons.public),
               title: Text("Interés del mercado"),
               subtitle: Text("Alta actividad en exchanges principales"),
             ),
-
             const SizedBox(height: 20),
 
-            /// novedades de los detalles
             const Text(
               "Últimas novedades",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-
             const SizedBox(height: 10),
 
             const Column(
@@ -142,9 +176,7 @@ class DetailsScreen extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.show_chart, color: Colors.orange),
                   title: Text("Alta volatilidad"),
-                  subtitle: Text(
-                    "Se detectan movimientos bruscos en el precio",
-                  ),
+                  subtitle: Text("Se detectan movimientos bruscos en el precio"),
                 ),
                 ListTile(
                   leading: Icon(Icons.public, color: Colors.blue),
@@ -152,50 +184,6 @@ class DetailsScreen extends StatelessWidget {
                   subtitle: Text("Mayor actividad en mercados internacionales"),
                 ),
               ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// apartado de las noticias
-  void _showNews(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainerHighest,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Text(
-              "Noticias del mercado",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-
-            SizedBox(height: 15),
-
-            ListTile(
-              leading: Icon(Icons.article, color: Colors.blue),
-              title: Text("Bitcoin sube por demanda"),
-              subtitle: Text("Analistas ven tendencia positiva"),
-            ),
-
-            ListTile(
-              leading: Icon(Icons.article, color: Colors.orange),
-              title: Text("Mercado muestra recuperación"),
-              subtitle: Text("Expertos recomiendan cautela"),
-            ),
-
-            ListTile(
-              leading: Icon(Icons.article, color: Colors.green),
-              title: Text("Alta volatilidad detectada"),
-              subtitle: Text("Movimientos bruscos en el precio"),
             ),
           ],
         ),
