@@ -84,6 +84,17 @@ class DetailsScreen extends StatelessWidget {
 
             /// boton para las noticias
             ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
               onPressed: () => _showNews(context),
               icon: const Icon(Icons.article),
               label: const Text("Ver noticias"),
@@ -156,7 +167,7 @@ class DetailsScreen extends StatelessWidget {
       builder: (context) => Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.grey[900],
+          color: Theme.of(context).colorScheme.surfaceContainerHighest,
           borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
         ),
         child: Column(
