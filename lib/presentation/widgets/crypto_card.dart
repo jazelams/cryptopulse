@@ -156,16 +156,31 @@ class CryptoCard extends StatelessWidget {
               ],
             ),
 
+            
             // boton accion estrella del fav
-            IconButton(
-              icon: Icon(
-                isFavorite ? Icons.star : Icons.star_border,
-                color: isFavorite
+              Builder(
+              builder: (context) {
+                final isDark = Theme.of(context).brightness == Brightness.dark;
+                final cs = Theme.of(context).colorScheme;
+
+                // este es para el color de la estrella en modo claro
+                final activeColor = isDark
                     ? Colors.white
-                    : Colors.grey.withValues(alpha: 0.3),
-              ),
-              onPressed:
-                  onFavoriteToggle, 
+                    : const Color.fromARGB(255, 226, 53, 53); // ámbar-dorado
+
+                // esto es para el borde de la estrella cuando no esta cliqueada
+                final inactiveColor = isDark
+                    ? const Color.fromARGB(255, 128, 128, 128).withValues(alpha: 1)
+                    : cs.outline; 
+                return IconButton(
+                  icon: Icon(
+                    isFavorite ? Icons.star_rounded : Icons.star_outline_rounded,
+                    color: isFavorite ? activeColor : inactiveColor,
+                    size: 22,
+                  ),
+                  onPressed: onFavoriteToggle,
+                );
+              },
             ),
           ],
         ),
