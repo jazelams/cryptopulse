@@ -143,16 +143,29 @@ class CryptoCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text(
-                  change,
-                  style: TextStyle(
-                    color: isPositive
-                        ? Colors.greenAccent.shade400
-                        : Colors.redAccent.shade400,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
-                  ),
-                ),
+               Row(
+          mainAxisSize: MainAxisSize.min,
+        children: [
+         Icon(
+          isPositive ? Icons.arrow_upward : Icons.arrow_downward,
+          size: 14,
+          color: isPositive
+          ? Colors.greenAccent.shade400
+          : Colors.redAccent.shade400,
+    ),
+    const SizedBox(width: 4),
+    Text(
+      change,
+      style: TextStyle(
+        color: isPositive
+            ? Colors.greenAccent.shade400
+            : Colors.redAccent.shade400,
+        fontWeight: FontWeight.w600,
+        fontSize: 14,
+      ),
+    ),
+  ],
+),
               ],
             ),
 
