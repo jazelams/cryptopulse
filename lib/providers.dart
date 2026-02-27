@@ -1,9 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// Controla que filtro está activo si todos o solo fav
+// filtro activo en home: Todos o Favoritos
 final filterProvider = StateProvider<String>((ref) => 'Todos');
 
-// Controla que crypto están marcados como favoritos
+// preferencias de usuario
+final currencyProvider = StateProvider<String>((ref) => 'MXN');
+final languageProvider = StateProvider<String>((ref) => 'Español');
+
+// maneja la lista de criptos marcadas como favoritas
 class FavoritesNotifier extends StateNotifier<List<String>> {
   FavoritesNotifier() : super([]);
 

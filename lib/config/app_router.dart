@@ -10,9 +10,8 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/details',
       builder: (context, state) {
-        // Si state.extra es null, usa un Map vacío de respaldo
-        final crypto =
-            (state.extra as Map<String, dynamic>?) ??
+        // fallback por si llega null en el extra
+        final crypto = (state.extra as Map<String, dynamic>?) ??
             {
               'name': 'Error',
               'symbol': 'ERR',
