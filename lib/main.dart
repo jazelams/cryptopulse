@@ -12,17 +12,13 @@ class CryptoPulseApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(
-      themeProvider,
-    ); //aqui esta  el estado actual del tema desde el provider
+    final themeMode = ref.watch(themeProvider); // aqui esta el estado actual del tema desde el provider
     return MaterialApp.router(
       title: 'CryptoPulse',
       debugShowCheckedModeBanner: false,
-      themeAnimationDuration: Duration
-          .zero, // aqui se configura la eliminacion de la animacion del cambio de tema.
+      themeAnimationDuration: Duration.zero, // aqui se configura la eliminacion de la animacion del cambio de tema
       themeAnimationCurve: Curves.linear,
       themeMode: themeMode,
-
       theme: ThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: const Color.fromARGB(255, 225, 228, 232),
@@ -33,9 +29,7 @@ class CryptoPulseApp extends ConsumerWidget {
         ),
         appBarTheme: const AppBarTheme(
           backgroundColor: Color.fromARGB(255, 225, 228, 232),
-          foregroundColor: Color(
-            0xFF1A1A1A,
-          ), // El color del título y los iconos
+          foregroundColor: Color(0xFF1A1A1A),
           elevation: 0,
         ),
         useMaterial3: true,

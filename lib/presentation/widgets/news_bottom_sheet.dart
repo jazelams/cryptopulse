@@ -14,10 +14,8 @@ class NewsBottomSheet extends StatelessWidget {
       child: const Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            "Noticias del mercado",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
+          Text("Noticias del mercado",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           SizedBox(height: 15),
           ListTile(
             leading: Icon(Icons.article, color: Colors.blue),
